@@ -20,23 +20,25 @@ app.get('/api/whoami', function (req, res) {
   // res.json({ greeting: 'hello API' });
   const rawHeaders = req.rawHeaders;
   // Host
+  let ipAddress = null;
   const hostKeyIndex = rawHeaders.indexOf('Host');
   const host = rawHeaders[hostKeyIndex + 1];
   const hostExtract = host.match(/^localhost|\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}/);
   if (hostExtract) {
     if (hostExtract[0] === 'localhost') {
-      ipaddress = '127.0.0.1';
+      ipAddress = '127.0.0.1';
     } else {
-      ipaddress = hostExtract[0];
+      ipAddress = hostExtract[0];
     }
   }
+  console.log('The IP', req.headers);
   // Language
   const languageKeyIndex = rawHeaders.indexOf('Accept-Language');
   const language = rawHeaders[languageKeyIndex + 1];
   // software
   const userAgentKeyIndex = rawHeaders.indexOf('User-Agent');
   const software = rawHeaders[userAgentKeyIndex + 1];
-  res.json({ipaddress, language, software});
+  res.json({ipAddress, language, software});
 
 
 });
