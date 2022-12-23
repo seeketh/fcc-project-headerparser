@@ -16,29 +16,14 @@ app.get('/', function (req, res) {
 
 // your first API endpoint...
 app.get('/api/whoami', function (req, res) {
-  // console.log('REQ', req.rawHeaders);
-  // res.json({ greeting: 'hello API' });
-  // const rawHeaders = req.rawHeaders;
-  // Host
-  let ipAddress = req.headers['true-client-ip'];
-  // const hostKeyIndex = rawHeaders.indexOf('Host');
-  // const host = rawHeaders[hostKeyIndex + 1];
-  // const hostExtract = host.match(/^localhost|\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}/);
-  // if (hostExtract) {
-  //   if (hostExtract[0] === 'localhost') {
-  //     ipAddress = '127.0.0.1';
-  //   } else {
-  //     ipAddress = hostExtract[0];
-  //   }
-  // }
-  console.log('The IP', req.headers);
+  // IP
+  const ipAddress = req.headers['true-client-ip'];
   // Language
   const language= req.headers['accept-language'];
- 
   // software
   const software = req.headers['user-agent'];
-  console.log('The IP', ipAddress, language, software);
-  res.json({ipAddress, language, software});
+
+  res.json({ipaddress: ipAddress, language, software});
 
 
 });
