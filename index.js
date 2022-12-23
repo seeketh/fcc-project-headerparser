@@ -18,26 +18,26 @@ app.get('/', function (req, res) {
 app.get('/api/whoami', function (req, res) {
   // console.log('REQ', req.rawHeaders);
   // res.json({ greeting: 'hello API' });
-  const rawHeaders = req.rawHeaders;
+  // const rawHeaders = req.rawHeaders;
   // Host
-  let ipAddress = null;
-  const hostKeyIndex = rawHeaders.indexOf('Host');
-  const host = rawHeaders[hostKeyIndex + 1];
-  const hostExtract = host.match(/^localhost|\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}/);
-  if (hostExtract) {
-    if (hostExtract[0] === 'localhost') {
-      ipAddress = '127.0.0.1';
-    } else {
-      ipAddress = hostExtract[0];
-    }
-  }
+  let ipAddress = req.headers['true-client-ip'];
+  // const hostKeyIndex = rawHeaders.indexOf('Host');
+  // const host = rawHeaders[hostKeyIndex + 1];
+  // const hostExtract = host.match(/^localhost|\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}/);
+  // if (hostExtract) {
+  //   if (hostExtract[0] === 'localhost') {
+  //     ipAddress = '127.0.0.1';
+  //   } else {
+  //     ipAddress = hostExtract[0];
+  //   }
+  // }
   console.log('The IP', req.headers);
   // Language
-  const languageKeyIndex = rawHeaders.indexOf('Accept-Language');
-  const language = rawHeaders[languageKeyIndex + 1];
+  const language= req.headers['accept-language'];
+ 
   // software
-  const userAgentKeyIndex = rawHeaders.indexOf('User-Agent');
-  const software = rawHeaders[userAgentKeyIndex + 1];
+  const software = req.headers['user-agent'];
+  console.log('The IP', ipAddress, language, software);
   res.json({ipAddress, language, software});
 
 
